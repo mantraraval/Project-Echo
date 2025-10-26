@@ -57,11 +57,11 @@ After validation, the approved summary is converted into a **text + audio packag
 
 ### 1. **Agent Architecture Diagram**  
 *Visual representation of the n8n workflow — from query submission to verified summary delivery.*  
-📎 *(Insert: `artifacts/architecture.png`)*  
+📎 ![Workflow Architecture](./workflow.jpg) 
 
 ### 2. **Proof of Multi-Modal Delivery**  
 *Email confirmation showing the text summary and attached audio file delivered to the end user.*  
-📎 *(Insert: `artifacts/email_demo.png`)*  
+📎 ![Email Output](./email%20output.jpg)
 
 ---
 
