@@ -40,7 +40,7 @@ Project Echo follows a structured, four-step pipeline:
 
 | Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
-| **Text-to-Speech Generator** | Converts the verified summaries into natural-sounding audio files. | **Open AI** |
+| **Text-to-Speech Generator** | Converts the verified summaries into natural-sounding audio files. | **TTS/Open AI** |
 
 ---
 
