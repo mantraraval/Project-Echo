@@ -24,7 +24,7 @@ Project Echo follows a structured, four-step pipeline:
 | Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
 | **AI Agent (Orchestrator)** | Manages workflow steps and coordinates AI tools. | **n8n workflow** |
-| **Article Fetch & Summarizer** | Reads articles, extracts key points, and generates initial summaries. | **Perplexity ** |
+| **Article Fetch & Summarizer** | Reads articles, extracts key points, and generates initial summaries. | **Perplexity** |
 
 ---
 
