@@ -24,7 +24,7 @@ Project Echo follows a structured, four-step pipeline:
 | Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
 | **AI Agent (Orchestrator)** | Manages workflow steps and coordinates AI tools. | **n8n workflow** |
-| **Article Fetch & Summarizer** | Reads articles, extracts key points, and generates initial summaries. | **Perplexity API** |
+| **Article Fetch & Summarizer** | Reads articles, extracts key points, and generates initial summaries. | **Perplexity ** |
 
 ---
 
@@ -32,7 +32,7 @@ Project Echo follows a structured, four-step pipeline:
 
 | Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
-| **Summary Evaluation & Refinement** | Checks summaries for factual accuracy, clarity, and appropriateness; corrects errors. | **OpenAI API (guardrails / evaluation)** |
+| **Summary Evaluation & Refinement** | Checks summaries for factual accuracy, clarity, and appropriateness; corrects errors. | **OpenAI GPT (guardrails / evaluation)** |
 
 ---
 
@@ -40,7 +40,7 @@ Project Echo follows a structured, four-step pipeline:
 
 | Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
-| **Text-to-Speech Generator** | Converts the verified summaries into natural-sounding audio files. | **TTS engine** |
+| **Text-to-Speech Generator** | Converts the verified summaries into natural-sounding audio files. | **Open AI** |
 
 ---
 
