@@ -1,72 +1,75 @@
-# 🎓 Project Echo: Agentic AI Architecture for Verified, Multi-Modal Research Synthesis  
+# 🎓 Project Echo: Agentic AI Pipeline for Verified, Multi-Modal Research Synthesis  
 
-**Project Echo** is a high-assurance **AI Agent Workflow** engineered to automate the synthesis, validation, and multi-modal delivery of research content.  
-It applies advanced system design principles to ensure **factual grounding, reliability, and accessibility**, transforming how information is summarized and shared.  
-
----
-
-## 🎯 I. Problem Statement & Design Motivation  
-
-| Challenge | Impact on Traditional LLM Use | Design Motivation |
-| :--- | :--- | :--- |
-| **Factual Integrity** | Standard LLMs tend to hallucinate, reducing the reliability of generated summaries. | **Grounded Reasoning:** Implement retrieval-augmented generation (RAG) to ensure each summary is evidence-based. |
-| **System Reliability** | Lack of automated safety and quality control often compromises trustworthiness. | **Self-Auditing:** Introduce automated evaluation layers and “LLM-as-a-Judge” checks to validate accuracy and tone. |
-| **Accessibility** | Reading-only research consumption limits engagement and usability. | **Multi-Modal Output:** Transform validated summaries into high-quality audio for a more accessible experience. |
+**Project Echo** is a high-assurance **AI Agent Workflow** that automates the retrieval, validation, and multi-modal delivery of research content.  
+It combines **Perplexity API** for evidence-based article reading and summarization, **OpenAI API** for guardrails and quality evaluation, and a **TTS engine** for audio generation.  
+The workflow ends with automated email delivery, creating a complete end-to-end research automation pipeline.  
 
 ---
 
-## 🛠️ II. The Architectural Solution: A Multi-Stage Agent Pipeline  
+## 🎯 I. Workflow Overview  
 
-Built using **n8n**, this pipeline divides the workflow into modular, accountable phases — each addressing a key reliability layer.  
+Project Echo follows a structured, four-step pipeline:
 
-### **Phase 1: Research and Factual Grounding**  
-
-The system begins by fetching and curating information from recent sources within a defined timeframe.  
-
-| Component | Function | Demonstrated Capability |
-| :--- | :--- | :--- |
-| **AI Agent (Core Orchestrator)** | Coordinates reasoning, retrieval, and task execution. | **Agentic Architecture:** Implements dynamic decision-making and tool orchestration. |
-| **Retrieval Engine** | Performs real-time search and extracts citation-based content. | **Factual Grounding:** Minimizes hallucination through verified retrieval. |
-| **Summarization Model** | Synthesizes retrieved content into concise, coherent outputs. | **Selective Synthesis:** Generates summaries optimized for clarity and precision. |
+1. **Article Retrieval & Summarization** → Fetches articles and generates initial summaries.  
+2. **Guardrails & Verification** → Evaluates summaries to ensure factual accuracy and appropriateness.  
+3. **Audio Generation** → Converts verified summaries into natural-sounding audio.  
+4. **Automated Delivery** → Sends the final text + audio to the user via email.  
 
 ---
 
-### **Phase 2: Algorithmic Guardrails (High-Assurance Validation)**  
+## 🛠️ II. Phase-by-Phase Breakdown  
 
-To maintain quality and factual integrity, Project Echo employs layered validation before producing any final output.  
+### **Phase 1: Article Retrieval & Initial Summarization**  
 
-| Component | Function | Demonstrated Capability |
+| Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
-| **Content Classifier** | Screens text for policy violations or inappropriate material. | **Safety Engineering:** Enforces responsible AI behavior pre-deployment. |
-| **Evaluation Node** | Performs a secondary review (LLM-as-a-Judge) to score accuracy and tone. | **Self-Auditing:** Ensures factual consistency and professional language. |
+| **AI Agent (Orchestrator)** | Manages workflow steps and coordinates AI tools. | **n8n workflow** |
+| **Article Fetch & Summarizer** | Reads articles, extracts key points, and generates initial summaries. | **Perplexity API** |
 
 ---
 
-### **Phase 3: Multi-Modal Distribution (Echo Delivery Layer)**  
+### **Phase 2: Guardrails & Verification**  
 
-After validation, the approved summary is converted into a **text + audio package** and delivered to the user’s inbox.  
-
-| Component | Function | Demonstrated Capability |
+| Component | Role | Tool / AI Used |
 | :--- | :--- | :--- |
-| **Text-to-Speech Generator** | Converts final text into a natural-sounding audio file. | **Multi-Modal Output:** Enhances accessibility and user experience. |
-| **Automated Mailer** | Sends both text and audio files via email to the user. | **End-to-End Integration:** Demonstrates real-world delivery and automation. |
+| **Summary Evaluation & Refinement** | Checks summaries for factual accuracy, clarity, and appropriateness; corrects errors. | **OpenAI API (guardrails / evaluation)** |
+
+---
+
+### **Phase 3: Audio Generation**  
+
+| Component | Role | Tool / AI Used |
+| :--- | :--- | :--- |
+| **Text-to-Speech Generator** | Converts the verified summaries into natural-sounding audio files. | **TTS engine** |
+
+---
+
+### **Phase 4: Automated Delivery**  
+
+| Component | Role | Tool / AI Used |
+| :--- | :--- | :--- |
+| **Email Sender** | Delivers both text and audio files to the user. | **n8n Mailer Node + Email API** |
 
 ---
 
 ## 🖼️ III. Project Artifacts  
 
-### 1. **Agent Architecture Diagram**  
-*Visual representation of the n8n workflow — from query submission to verified summary delivery.*  
- ![Workflow Architecture](./workflow.jpg) 
+### 1. **Workflow Architecture**  
+*Diagram showing the end-to-end pipeline from article retrieval to email delivery.*  
+![Workflow Architecture](./workflow.jpg)
 
-### 2. **Proof of Multi-Modal Delivery**  
-*Email confirmation showing the text summary and attached audio file delivered to the end user.*  
- ![Email Output](./email%20output.jpg)
+### 2. **Email Delivery Proof**  
+*Screenshot of final email showing the text summary and attached audio.*  
+![Email Output](./email%20output.jpg)
 
 ---
 
-## 📈 IV. Outcome Summary  
+## 📈 IV. Key Outcomes  
 
-Through **Project Echo**, I designed a **trustworthy, end-to-end AI agent pipeline** that unites reasoning, self-evaluation, and accessibility.  
-It demonstrates how **retrieval-grounded intelligence** and **multi-modal communication** can create a reliable system for verified, human-centric knowledge delivery.  
+**Project Echo** demonstrates a fully functional, retrieval-grounded AI agent pipeline that:  
+- **Fetches & summarizes research accurately** using **Perplexity API**.  
+- **Ensures summary correctness and reliability** with **OpenAI API guardrails**.  
+- **Provides multi-modal accessibility** via a **TTS engine**.  
+- **Delivers content efficiently** through automated email integration.  
 
+This pipeline guarantees **factual, auditable, and human-centric knowledge delivery**, making research consumption faster, more reliable, and accessible.
