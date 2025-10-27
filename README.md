@@ -1,7 +1,7 @@
 # 🎓 Project Echo: Agentic AI Pipeline for Verified, Multi-Modal Research Synthesis  
 
 **Project Echo** is a high-assurance **AI Agent Workflow** that automates the retrieval, validation, and multi-modal delivery of research content.  
-It combines **Perplexity AI API** for evidence-based article reading and summarization, **OpenAI GPT API** for guardrails and quality evaluation, and a ** OpenAI TTS engine** for audio generation.  
+It combines **Perplexity AI API** for evidence-based article reading and summarization, **OpenAI GPT API** for guardrails and quality evaluation, and a **OpenAI TTS engine** for audio generation.  
 The workflow ends with automated email delivery, creating a complete end-to-end research automation pipeline.  
 
 ---
