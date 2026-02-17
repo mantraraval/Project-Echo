@@ -19,20 +19,6 @@ Project Echo is a fully agentic n8n workflow. A user submits a research topic vi
 
 ---
 
-## 🖼️ Project Artifacts
-
-### Workflow Architecture
-*Full n8n canvas showing every node and connection in the pipeline.*
-
-![Workflow Architecture](./workflow.jpg)
-
-### Email Delivery Output
-*Gmail inbox showing the automated "Topic Summary" email with `audio.mp3` attached.*
-
-![Email Output](./email%20output.jpg)
-
----
-
 ## 🎯 Pipeline Overview
 
 ```
@@ -154,6 +140,20 @@ Project Echo is a fully agentic n8n workflow. A user submits a research topic vi
 - **Evaluation scoring is GPT-assessed** — it reflects model judgment of quality, not ground-truth factual accuracy.
 - **TTS output is unreviewed** before delivery — for high-stakes use cases, add a manual approval node between Phase 4 and Phase 5.
 - **Flagged path** currently sends an alert and stops — it does not retry or attempt content correction automatically.
+
+---
+
+## 🖼️ Project Artifacts
+
+### Workflow Architecture
+*Full n8n canvas showing every node and connection in the pipeline.*
+
+![Workflow Architecture](./workflow.jpg)
+
+### Email Delivery Output
+*Gmail inbox showing the automated "Topic Summary" email with `audio.mp3` attached.*
+
+![Email Output](./email%20output.jpg)
 
 ---
 
