@@ -1,75 +1,168 @@
-# 🎓 Project Echo: Agentic AI Pipeline for Verified, Multi-Modal Research Synthesis  
+# 🎓 Project Echo
 
-**Project Echo** is a high-assurance **AI Agent Workflow** that automates the retrieval, validation, and multi-modal delivery of research content.  
-It combines **Perplexity AI API** for evidence-based article reading and summarization, **OpenAI GPT API** for guardrails and quality evaluation, and a **OpenAI TTS engine** for audio generation.  
-The workflow ends with automated email delivery of summarised audio file, creating a complete end-to-end research automation pipeline.  
+![n8n](https://img.shields.io/badge/Orchestration-n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white)
+![OpenAI](https://img.shields.io/badge/AI_Agent-OpenAI_GPT-412991?style=flat-square&logo=openai&logoColor=white)
+![Perplexity](https://img.shields.io/badge/Research_Tool-Perplexity_AI-20808D?style=flat-square&logoColor=white)
+![TTS](https://img.shields.io/badge/Audio-OpenAI_TTS-412991?style=flat-square&logo=openai&logoColor=white)
+![Gmail](https://img.shields.io/badge/Delivery-Gmail_API-D14836?style=flat-square&logo=gmail&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
----
-
-## 🎯 I. Workflow Overview  
-
-Project Echo follows a structured, four-step pipeline:
-
-1. **Article Retrieval & Summarization** → Fetches articles and generates initial summaries.  
-2. **Guardrails & Verification** → Evaluates summaries to ensure factual accuracy and appropriateness.  
-3. **Audio Generation** → Converts verified summaries into natural-sounding audio.  
-4. **Automated Delivery** → Sends the final text + audio to the user via email.  
+> **Agentic AI Pipeline for Verified, Multi-Modal Research Synthesis** — A user submits a topic, GPT autonomously researches it via Perplexity, validates the output through guardrails and evaluation, converts it to audio, and delivers `audio.mp3` to the inbox — fully automated.
 
 ---
 
-## 🛠️ II. Phase-by-Phase Breakdown  
+## 📌 Overview
 
-### **Phase 1: Article Retrieval & Initial Summarization**  
+Project Echo is a fully agentic n8n workflow. A user submits a research topic via a form, and the pipeline handles everything after autonomously.
 
-| Component | Role | Tool / AI Used |
-| :--- | :--- | :--- |
-| **AI Agent (Orchestrator)** | Manages workflow steps and coordinates AI tools. | **n8n workflow** |
-| **Article Fetch & Summarizer** | Reads articles, extracts key points, and generates initial summaries. | **Perplexity** |
+**OpenAI GPT** acts as the agent brain — it reasons, orchestrates, and calls **Perplexity AI** as an integrated research tool to fetch and summarize web-grounded articles. The summary is then passed through a **GPT-powered content moderation layer**, a **quality evaluation sub-chain**, converted to **audio via OpenAI TTS**, and delivered as `audio.mp3` to the user's Gmail inbox — zero manual steps required.
 
 ---
 
-### **Phase 2: Guardrails & Verification**  
+## 🖼️ Project Artifacts
 
-| Component | Role | Tool / AI Used |
-| :--- | :--- | :--- |
-| **Summary Evaluation & Refinement** | Checks summaries for factual accuracy, clarity, and appropriateness; corrects errors. | **OpenAI GPT (guardrails / evaluation)** |
+### Workflow Architecture
+*Full n8n canvas showing every node and connection in the pipeline.*
 
----
-
-### **Phase 3: Audio Generation**  
-
-| Component | Role | Tool / AI Used |
-| :--- | :--- | :--- |
-| **Text-to-Speech Generator** | Converts the verified summaries into natural-sounding audio files. | **TTS/Open AI** |
-
----
-
-### **Phase 4: Automated Delivery**  
-
-| Component | Role | Tool / AI Used |
-| :--- | :--- | :--- |
-| **Email Sender** | Delivers both text and audio files to the user. | **n8n Mailer Node + Email API** |
-
----
-
-## 🖼️ III. Project Artifacts  
-
-### 1. **Workflow Architecture**  
-*Diagram showing the end-to-end pipeline from article retrieval to email delivery.*  
 ![Workflow Architecture](./workflow.jpg)
 
-### 2. **Email Delivery Proof**  
-*Screenshot of final email showing the text summary and attached audio.*  
+### Email Delivery Output
+*Gmail inbox showing the automated "Topic Summary" email with `audio.mp3` attached.*
+
 ![Email Output](./email%20output.jpg)
 
 ---
 
-## 📈 IV. Key Outcomes  
+## 🎯 Pipeline Overview
 
-**Project Echo** demonstrates a fully functional, retrieval-grounded AI agent pipeline that:  
-- **Fetches & summarizes research accurately** using **Perplexity API**.  
-- **Ensures summary correctness and reliability** with **OpenAI API guardrails**.  
-- **Provides multi-modal accessibility** via a **TTS engine**.  
-- **Delivers content efficiently** through automated email integration.  
+```
+┌──────────────────────────────────────────────────┐
+│  TRIGGER                                         │
+│  On Form Submission  /  When Fetching Dataset Row│
+└───────────────────────┬──────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────┐
+│  PHASE 1 — AI Agent                              │
+│  • OpenAI GPT    →  agent reasoning backbone     │
+│  • Simple Memory →  conversational context       │
+│  • Perplexity    →  web retrieval & summarization│
+└───────────────────────┬──────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────┐
+│  PHASE 2 — Guardrails                            │
+│  • Classify Text for Violations (OpenAI GPT)     │
+│  • Switch — routes on classification result      │
+│    ├── CLEAN   → Phase 3                         │
+│    └── FLAGGED → Alert email (pipeline stops)    │
+└───────────────────────┬──────────────────────────┘
+                        │ (clean path only)
+                        ▼
+┌──────────────────────────────────────────────────┐
+│  PHASE 3 — Quality Evaluation                    │
+│  • Evaluation  (setOutputs)                      │
+│  • Evaluation1 (setMetrics)                      │
+│  • OpenAI GPT  scores summary quality            │
+└───────────────────────┬──────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────┐
+│  PHASE 4 — Audio Generation                      │
+│  • OpenAI TTS → generates audio.mp3              │
+└───────────────────────┬──────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────┐
+│  PHASE 5 — Gmail Delivery                        │
+│  • Gmail → "Topic Summary" email + audio.mp3     │
+└──────────────────────────────────────────────────┘
+```
 
-This pipeline guarantees **factual, auditable, and human-centric knowledge delivery**, making research consumption faster, more reliable, and accessible.
+---
+
+## 🛠️ Node-by-Node Breakdown
+
+### Phase 1 — AI Agent & Research
+
+| Node | Role | Tool |
+|:---|:---|:---|
+| **On Form Submission** | Captures user's research topic as the primary trigger | n8n Form Trigger |
+| **When Fetching a Dataset Row** | Enables batch topic processing over a dataset | n8n Dataset Trigger |
+| **AI Agent** | Orchestrates the research sub-chain; GPT reasons and decides when to call Perplexity | n8n AI Agent Node |
+| **OpenAI Chat Model** | Powers the AI Agent's reasoning, planning, and response generation | OpenAI GPT API |
+| **Simple Memory** | Maintains conversational context across agent steps | n8n Memory Node |
+| **Message a Model in Perplexity** | Called by GPT as a tool — fetches live web articles and returns a grounded summary | Perplexity AI API |
+
+---
+
+### Phase 2 — Content Guardrails
+
+| Node | Role | Tool |
+|:---|:---|:---|
+| **Classify Text for Violations** | Reviews the agent's output for harmful, inappropriate, or unsafe content | OpenAI GPT API |
+| **Switch** | Routes flow based on classification: clean content proceeds, flagged content is blocked | n8n Switch Node |
+| **Send a Message1** | Sends an alert email if content is flagged — pipeline stops here | Gmail API |
+
+---
+
+### Phase 3 — Quality Evaluation
+
+| Node | Role | Tool |
+|:---|:---|:---|
+| **Evaluation** | Captures output data and sets evaluation outputs | n8n Evaluation Node |
+| **Evaluation1** | Records final quality metrics for the run | n8n Evaluation Node |
+| **OpenAI Chat Model1** | Scores the summary for quality, coherence, and relevance | OpenAI GPT API |
+
+---
+
+### Phase 4 — Audio Generation
+
+| Node | Role | Tool |
+|:---|:---|:---|
+| **Generate Audio** | Converts the verified, evaluated summary into `audio.mp3` | OpenAI TTS API |
+
+---
+
+### Phase 5 — Gmail Delivery
+
+| Node | Role | Tool |
+|:---|:---|:---|
+| **Send a Message** | Sends "Topic Summary" email with `audio.mp3` attached to the user | Gmail API |
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer | Technology |
+|:---|:---|
+| **Orchestration** | n8n (self-hosted or cloud) |
+| **AI Agent Backbone** | OpenAI GPT (Chat Completions API) |
+| **Research & Retrieval Tool** | Perplexity AI API (called by GPT agent) |
+| **Content Moderation** | OpenAI GPT (Classify Text for Violations) |
+| **Quality Evaluation** | OpenAI GPT (Evaluation sub-chain) |
+| **Audio Generation** | OpenAI TTS API |
+| **Email Delivery** | Gmail API via n8n Gmail Node |
+| **Agent Memory** | n8n Simple Memory Node |
+
+---
+
+## ⚠️ Limitations
+
+- **Perplexity source quality** depends on web availability for the topic — niche or very recent topics may yield thinner summaries.
+- **Guardrails are prompt-based** — they reduce but do not guarantee filtering of all policy-violating content.
+- **Evaluation scoring is GPT-assessed** — it reflects model judgment of quality, not ground-truth factual accuracy.
+- **TTS output is unreviewed** before delivery — for high-stakes use cases, add a manual approval node between Phase 4 and Phase 5.
+- **Flagged path** currently sends an alert and stops — it does not retry or attempt content correction automatically.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
+
+---
+
+<div align="center">
+  <sub>Built by <a href="https://github.com/mantraraval">mantraraval</a></sub>
+</div>
